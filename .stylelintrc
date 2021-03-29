@@ -1,0 +1,17 @@
+{
+	"ignoreFiles": [
+		"./node_modules/**/*.*",
+		"./build/**/*.*",
+		"./src/scss/utils/**/*.*",
+		"./_public/**/*.*",
+		"**/*.js"
+	],
+	"plugins": [
+		"stylelint-config-styled-components",
+		"stylelint-scss"
+	],
+	"rules": {
+		"indentation": "tab",
+		"string-quotes": "double"
+	}
+}
