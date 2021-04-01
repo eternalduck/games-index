@@ -23,6 +23,7 @@ export const colors = {
 	lightestGray: "#EEEFEE",
 	mint: "#ABEAF4",
 	peach: "#FFDECC",
+	transparentWhite: "rgba(255, 255, 255, .1)",
 
 }
 export const mixins = {
@@ -113,8 +114,8 @@ export const mixins = {
 		border-radius: 3px;
 		border: none;
 		outline: none;
-		transition: opacity .2s ease-in;
-		&:hover {opacity: .9}
+		transition: opacity .15s ease-in;
+		&:hover {opacity: .85}
 	`,
 
 }//mixins

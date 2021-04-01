@@ -51,7 +51,7 @@ module.exports = {
 		),
 		new copyPlugin({
 			patterns: [
-				{//don"t copy *html to avoid index.html rewriting
+				{//don't copy *html to avoid index.html rewriting
 					globOptions: {
 						// gitignore: true,
 						dot: true,

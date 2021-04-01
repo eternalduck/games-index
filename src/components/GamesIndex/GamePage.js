@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react"
 import {useParams} from "react-router-dom"
 import styled from "styled-components"
 import {colors, mixins} from "../../style/vars-mixins/_index"
-import {Header, Footer} from "../Layout/HeaderFooter"
-import ContentWidth from "../Layout/ContentWidth"
+import {text} from "../data/text"
+import {config} from "../data/config"
+import {apiCalls} from "../service/apiCalls"
+import Layout from "../Layout/Layout"
 import Page404 from "../service/Page404"
 import Loading from "../service/Loading"
 
@@ -23,13 +25,13 @@ const GamePage = (props) => {
 
 
 	return (
-		!props.game ?
-		<Page404/> :
+		// !props.game ? //TODO enable this
+		// <Page404/> :
 		<>
-			<Header/>
-
-			<ContentWidth>
-				<Title>{props.game.name}</Title>
+			<Layout>
+				<Title>props.game.name</Title>
+				{/*<Title>{props.game.name}</Title>*/}
+				<p>splide slider</p>
 				{/*<Info>*/}
 				{/*	<p>{props.game.rating}</p>*/}
 				{/*	<p><b>{props.game.released}</b></p>*/}
@@ -51,8 +53,7 @@ const GamePage = (props) => {
 				{/*		]*/}
 				{/*	}</pre>*/}
 				{/*</Slider>*/}
-			</ContentWidth>
-			<Footer/>
+			</Layout>
 		</>
 	)
 }

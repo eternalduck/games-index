@@ -1,33 +1,37 @@
 import React from "react"
 import styled from "styled-components"
-import {media, colors, mixins} from "../../style/vars-mixins/_index"
-import ContentWidth from "../Layout/ContentWidth"
+import {colors, mixins} from "../../style/vars-mixins/_index"
 import {SportsHandball} from "@material-ui/icons"
+import {text} from "../data/text"
 
 
-export const Header = (props) => {
+export const Header = () => {
 	return (
 			<HeaderSc>
 				<ContentWidth>
 					<h2>
 						<SportsHandballSc fontSize="large"/>
-						The Largest Games Index
+						{text.siteTitle}
 					</h2>
 				</ContentWidth>
 			</HeaderSc>
 	)
 }
 
-export const Footer = (props) => {
+export const Footer = () => {
 	return (
 			<FooterSc>
 				<ContentWidth>
-					<p>task by @eternalduck, March 2021</p>
+					<p>{text.copyright}</p>
 				</ContentWidth>
 			</FooterSc>
 	)
 }
 
+
+const ContentWidth = styled.div`
+	${mixins.contentWidth};
+`
 const SportsHandballSc = styled(SportsHandball)`
 	margin-right: 10px;
 `
@@ -38,7 +42,7 @@ const HeaderSc = styled.header`
 `
 const FooterSc = styled.footer`
 	margin-top: 80px;
-	padding: 15px 0;
+	padding: 20px 0 15px;
 	background-color: ${colors.almostBlack};
 	color: ${colors.midGray};
 	font-size: 14px;

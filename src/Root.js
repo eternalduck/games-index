@@ -8,6 +8,7 @@ import Page404 from "./components/service/Page404"
 export default function Root(props){
 	let {path, url} = useRouteMatch()
 
+	// TMP
 	useEffect(() => {
 		console.log(`path: ${path}, url: ${url}`)
 	}, [])
@@ -18,7 +19,7 @@ export default function Root(props){
 			<Switch>
 				<Route exact path="/" component={IndexPage}/>
 				<Route exact path={`/game/:itemSlug`}>
-					<GamePage />{/*TODO data={}*/}
+					<GamePage/>
 				</Route>
 				<Route component={Page404}/>
 			</Switch>

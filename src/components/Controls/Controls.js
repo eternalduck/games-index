@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "styled-components"
 import {media, colors, mixins} from "../../style/vars-mixins/_index"
-import ContentWidth from "../Layout/ContentWidth"
 import Filter from "./Filter"
 import Sort from "./Sort"
 import Search from "./Search"
@@ -10,7 +9,6 @@ import Search from "./Search"
 const Controls = (props) => {
 
 	return (
-		<ContentWidth>
 			<Container>
 				<ControlWrap>
 					<Filter/>
@@ -22,7 +20,6 @@ const Controls = (props) => {
 					<Search/>
 				</SearchWrap>
 			</Container>
-		</ContentWidth>
 	)
 }
 

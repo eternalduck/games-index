@@ -34,11 +34,14 @@ const GlobalStyle = createGlobalStyle`
 //////////END TMP/////////////////////
 	
 	// 1. General
+	//html {
+	//	min-height: 100vh;
+	//}
 	body {
+		//height: 100%;
 		font-family: "Open Sans", sans-serif;
 		background: ${colors.darkGray};
 		color: ${colors.almostWhite};
-		//font-size: 16px;
 		font-size: calc(14px + (18 - 14) * ((100vw - 300px) / (1600 - 300)));
 		font-weight: 300;
 		line-height: 1.5;
@@ -91,26 +94,19 @@ const GlobalStyle = createGlobalStyle`
 	b, strong {
 		font-weight: 600;
 	}
-	//a {
-	//	text-decoration: none;
-	//}
-	// end typo
-
-	//Icons
-	// .icon {//fail
-	// 	// width: ${props => props.big ? "52px" : "32px"};
-	// 	// height: ${props => props.big ? "52px" : "32px"};
-	// 	width: 32px;
-	// 	height: 32px;
-	// }
-	.icon {
-		width: 32px;
-		height: 32px;
-		&_big {
-			width: 42px;
-			height: 42px;
+	a {
+		text-decoration: none;
+		&:hover {
+			text-decoration: underline;
 		}
 	}
+	// end typo
+
+	.hover {
+		cursor: pointer;
+	}
+	
+	
 `//createGlobalStyle
 
 export default GlobalStyle

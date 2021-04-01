@@ -2,26 +2,29 @@ import React, {useState, useEffect} from "react"
 import styled from "styled-components"
 import {media, colors, mixins} from "../../style/vars-mixins/_index"
 import {ArrowUpward, ArrowDownward} from "@material-ui/icons"
+import {text} from "../data/text"
 
 
-const Sort = (props) => {
+const Sort = () => {
+	// State for buttons decoration
 	const [ratingAsc, setRatingAsc] = useState(true)
 	const [dateAsc, setDateAsc] = useState(false)
-	//
-	// useEffect(() => {
-	// 	console.info(`ratingAsc: ${ratingAsc}, dateAsc: ${dateAsc}, `)
-	// }, [ratingAsc, dateAsc])
-
 
 	return (
 			<>
-				<p>Sort by:</p>
+				<p>{text.labelSortBy}</p>
 				<ButtonWrap>
-					<Button option={ratingAsc} onClick={() => setRatingAsc(dir => !dir)}>
-						Rating
+					<Button
+							option={ratingAsc}
+							onClick={() => setRatingAsc(dir => !dir)}
+					>
+						{text.btnSortByRating}
 					</Button>
-					<Button option={dateAsc} onClick={() => setDateAsc(dir => !dir)}>
-						Release Date
+					<Button
+							option={dateAsc}
+							onClick={() => setDateAsc(dir => !dir)}
+					>
+						{text.btnSortByDate}
 					</Button>
 				</ButtonWrap>
 			</>
