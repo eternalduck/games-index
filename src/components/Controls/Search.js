@@ -1,30 +1,24 @@
-import React, { useState, useEffect } from "react"
+import React, {useContext} from "react"
 import styled from "styled-components"
-import {media, colors, mixins} from "../../style/vars-mixins/_index"
+import {mixins} from "../../style/vars-mixins/_index"
 import {text} from "../data/text"
+import ControlContext from "./ControlContext"
 
-const Search = () => {
-	const [search, setSearch] = useState("")
-
-//EXAMPLE
-// https://github.com/theDavidBarton/video-games-on-RAWG-react-app/blob/master/client/src/components/search.jsx
-
-//https://api.rawg.io/api/games?search=303%20squadron
-// https://rawg.io/search?query=grand
+const Search = (props) => {
+	const cprops = useContext(ControlContext)
 
 	return (
-			<>
-				<SearchField type="text"
-					onChange={(e) => setSearch(e.target.value)}
-					value={search}
-					placeholder={text.labelSearch}
-				/>
-			</>
+		<>
+			<SearchInput type="text"
+				onChange={e => cprops.setSearch(e.target.value)}
+				value={cprops.search}
+				placeholder={text.labelSearch}
+			/>
+		</>
 	)
 }
-const SearchField = styled.input`
-	${mixins.input};
-
-`
-
 export default Search
+
+const SearchInput = styled.input`
+	${mixins.input}
+`

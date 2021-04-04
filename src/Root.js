@@ -6,19 +6,14 @@ import GamePage from "./components/GamesIndex/GamePage"
 import Page404 from "./components/service/Page404"
 
 export default function Root(props){
-	let {path, url} = useRouteMatch()
-
-	// TMP
-	useEffect(() => {
-		console.log(`path: ${path}, url: ${url}`)
-	}, [])
+	// let {path, url} = useRouteMatch()
 
 	return(
 			<>
 			<GlobalStyle/>
 			<Switch>
 				<Route exact path="/" component={IndexPage}/>
-				<Route exact path={`/game/:itemSlug`}>
+				<Route exact path={`/game/:slug`}>
 					<GamePage/>
 				</Route>
 				<Route component={Page404}/>

@@ -14,16 +14,17 @@ const Layout = (props) => {
 		</Container>
 	)
 }
+export default Layout
 
 const Container = styled.div`
 	width: 100%;
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
+	position: relative;
 `
 const ContentWidth = styled.div`
 	${mixins.contentWidth};
 	flex: 1;
 `
 
-export default Layout

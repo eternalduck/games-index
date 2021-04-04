@@ -1,32 +1,47 @@
 import React from "react"
 import styled from "styled-components"
-import {mixins} from "../../style/vars-mixins/_index"
-import {ArrowBack, ArrowForward} from "@material-ui/icons"
+import {media, mixins} from "../../style/vars-mixins/_index"
+import {ArrowBack, ArrowForward, Autorenew} from "@material-ui/icons"
+import {text} from "../data/text"
 
 const Nav = (props) => {
-
 	return (
 		<Navbar>
-			<ArrowBack
-				onClick={props.prev}
-				fontSize="large"
-				className={"hover"}
-			/>
-			{/*<p>{props.currentPage}</p>TODO*/}
-			<ArrowForward
-				onClick={props.next}
-				fontSize="large"
-				className={"hover"}
-			/>
+			{props.prev &&
+				<ArrowBack
+					onClick={props.prev}
+					fontSize="large"
+					className={"hover"}
+				/>
+			}
+			<Page>{props.loading
+				? <Autorenew/>
+				: <span>{props.currentPage}</span>
+			}
+			</Page>
+			{props.next &&
+				<ArrowForward
+					onClick={props.next}
+					fontSize="large"
+					className={"hover"}
+				/>
+			}
 		</Navbar>
 	)
-
 }
+export default Nav
 
 const Navbar = styled.nav`
-	outline: 1px dashed orange;
 	margin: 30px 0;
 	${mixins.flexRow};
+	${media.lg`
+		justify-content: center;
+	`}
 `
-
-export default Nav
+const Page = styled.p`
+	width: 120px;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	margin: 0 40px;
+`

@@ -1,40 +1,31 @@
-// some component's setState is passed as handler
-// TODO fetch options with header, etc should be here
-export const apiCall = async(url, handler) => {
-	const response = await fetch(url)
-	.then(res => res.json())
-	.then(data => handler(data))
+import {config} from "../data/config"
+const options = config.options
+const API_KEY = config.apiKey
+const pageSize = 6
+
+export const requestURLs = {
+
+	URLgamesList: `https://api.rawg.io/api/games?page_size=${pageSize}&key=${API_KEY}`,
+	URLratingDesc: `https://api.rawg.io/api/games?ordering=-rating&page_size=${pageSize}&key=${API_KEY}`,
+	URLratingAsc: `https://api.rawg.io/api/games?ordering=rating&page_size=${pageSize}&key=${API_KEY}`,
+	URLreleasedDesc: `https://api.rawg.io/api/games?ordering=-released&page_size=${pageSize}&key=${API_KEY}`,
+	URLreleasedAsc: `https://api.rawg.io/api/games?ordering=released&page_size=${pageSize}&key=${API_KEY}`,
+	URLsearch: `https://api.rawg.io/api/games?page_size=${pageSize}&key=${API_KEY}&search=`,
+	URLplatforms: `https://api.rawg.io/api/platforms/lists/parents?key=${API_KEY}`,
+	URLgamesByPlatform: `https://api.rawg.io/api/games?page_size=${pageSize}&key=${API_KEY}&parent_platforms=`,
+	// URLplatforms: `https://api.rawg.io/api/platforms?key=${API_KEY}`,
 }
 
-//ZB 1
-// useEffect(() => {
-//   fetch('http://127.0.0.1:8000/api/v1/products/all')
-//     .then((res) => res.json())
-//     .then((data) => setProductsList([...data]))
-//     .then(setisLoading(false));
-// }, []);
-
-// ZB 2
-// let parsedResult
-// const NEWapiCall = async (url, handler, options) => {
-//   // (I.) promise to return the parsedResult for processing
-//   const rawgRequest = () => {
-//     return new Promise((resolve, reject) => {
-//       request(options, (error, response, body) => {
-//         try {
-//           resolve(JSON.parse(body))
-//         } catch (e) {
-//           reject(e)
-//         }
-//       })
-//     })
-//   }
-//
-//   // (II.)
-//   try {
-//     parsedResult = await rawgRequest()
-//   } catch (e) {
-//     console.error(e)
-//   }
-//   return parsedResult
-// }
+// Some component's setState & loading detector are passed as handlers
+export const apiCall = async(handler, loadingHandler, url) => {
+	loadingHandler && loadingHandler(true)// reset loading
+	try {
+		await fetch(url, options)
+		.then(res => res.json())
+		.then(data => handler(data))
+		.then(loadingHandler && loadingHandler(false))
+	} catch(e) {
+		handler(null)
+		console.error("aaa main fetch failed!")
+	}
+}

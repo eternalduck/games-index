@@ -1,60 +1,56 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect, useContext} from "react"
 import styled from "styled-components"
 import {media, colors, mixins} from "../../style/vars-mixins/_index"
-import {config} from "../data/config"
 import {text} from "../data/text"
-import pl from "../TMP/platforms"//TMP
+import {requestURLs, apiCall} from "../service/apiCalls"
+import ControlContext from "./ControlContext"
+
 
 const Filter = () => {
-	const platforms = pl//TMP
-// GET https://api.rawg.io/api/platforms?key=API_KEY
-	// https://api.rawg.io/api/platforms/lists/parents?key=API_KEY
+	const cprops = useContext(ControlContext)
+	const [platformsData, setPlatformsData] = useState({})
+	const [platformsList, setPlatformsList] = useState({})
+	const [isLoading, setIsLoading] = useState(true)
 
-	//https://api.rawg.io/api/games?dates=2019-09-01,2019-09-30&platforms=18,1,7
-
-	//ORDERING============
-// Available fields: name, released, added, created, updated, rating, metacritic. You can reverse the sort order adding a hyphen, for example: -released.
-// https://rawg.io/?filters=%7B%22ordering%22:%5B%22-released%22%5D%7D
-
-
-		useEffect(() => {
-			// console.info(`count: ${count}`)
+	useEffect(() => {
+		const getPlatformsData = async() => {
+			await apiCall(setPlatformsData, setIsLoading, requestURLs.URLplatforms)
+		}
+		getPlatformsData()
 	}, [])
 
+	useEffect(() => {
+		if (platformsData) {
+			const processPlatformsList = () => {
+				const platforms = platformsData.results
+				setPlatformsList(platforms)
+				// console.info("processPlatformsList run")
+			}
+			processPlatformsList()
+		}
+	}, [platformsData])
 
 
 	return (
-			<>
-				<p>{text.labelSelectPlatform}</p>
-				<Select>
-					{
-						platforms && platforms.results.map(pl =>
-							<Option key={pl.id}>{pl.name}</Option>
-								// add deep nesting for subcat, reduce?
-						)
-					}
-				</Select>
-			</>
+		<>
+			<Select>
+				<option value={""}>{text.labelSelectPlatform}</option>
+				{!isLoading &&
+					platformsList && platformsList.map(pl =>
+						<option key={pl.id}
+							onClick={e => cprops.setPlatform(pl.id)}
+							value={pl.id}
+						>{pl.name}
+						</option>
+					)
+				}
+			</Select>
+		</>
 	)
 }
+export default Filter
 
 const Select = styled.select`
-	outline: 1px dashed orange;
-	position: relative;
 	${mixins.input};
-	
+	cursor: pointer;
 `
-
-const Option = styled.option`
-	${mixins.inputPadding};
-	background: ${colors.almostWhite};
-	color: ${colors.almostBlack};
-	//cursor: pointer;
-`
-const SubOption = styled.optgroup`
-	${mixins.inputPadding};
-	background: ${colors.almostWhite};
-	color: ${colors.almostBlack};
-`
-
-export default Filter

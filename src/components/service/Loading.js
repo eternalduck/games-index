@@ -1,15 +1,17 @@
 import React from "react"
 import styled, {keyframes} from "styled-components"
-import {colors, mixins} from "../../style/vars-mixins/_index"
+import {mixins} from "../../style/vars-mixins/_index"
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload"
 
-const Loading = (props) => {
+const Loading = () => {
 	return (
-			<LoadingWrap>
-				<CloudDownloadIconSc/>
-			</LoadingWrap>
+		<LoadingWrap>
+			<CloudDownloadIconSc/>
+		</LoadingWrap>
 	)
 }
+export default Loading
+
 const scale = keyframes`
 	0%, 100% {
 		transform: scale(1);
@@ -29,7 +31,6 @@ const LoadingWrap = styled.div`
 `
 const CloudDownloadIconSc = styled(CloudDownloadIcon)`
 	animation: ${scale} 1.2s linear infinite;
-	font-size: 100px !important;
+	font-size: 60px !important;
 `
 
-export default Loading

@@ -1,62 +1,67 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect, useContext} from "react"
 import styled from "styled-components"
-import {media, colors, mixins} from "../../style/vars-mixins/_index"
+import {colors, mixins} from "../../style/vars-mixins/_index"
 import {ArrowUpward, ArrowDownward} from "@material-ui/icons"
 import {text} from "../data/text"
+import ControlContext from "./ControlContext"
 
-
-const Sort = () => {
-	// State for buttons decoration
-	const [ratingAsc, setRatingAsc] = useState(true)
-	const [dateAsc, setDateAsc] = useState(false)
+const Sort = (props) => {
+	// State to change buttons icons, empty on load
+	const [ratingDesc, setRatingDesc] = useState(null)
+	const [dateDesc, setDateDesc] = useState(null)
+	const cprops = useContext(ControlContext)
 
 	return (
-			<>
-				<p>{text.labelSortBy}</p>
-				<ButtonWrap>
-					<Button
-							option={ratingAsc}
-							onClick={() => setRatingAsc(dir => !dir)}
-					>
-						{text.btnSortByRating}
-					</Button>
-					<Button
-							option={dateAsc}
-							onClick={() => setDateAsc(dir => !dir)}
-					>
-						{text.btnSortByDate}
-					</Button>
-				</ButtonWrap>
-			</>
+		<>
+			<ButtonWrap>
+				<Toggle
+					option={ratingDesc}
+					onClick={() => {
+						ratingDesc ? cprops.handlerRatingDesc() : cprops.handlerRatingAsc()
+						setRatingDesc(dir => !dir)
+					}}
+				>
+					{text.btnSortByRating}
+				</Toggle>
+				<Toggle
+					option={dateDesc}
+					onClick={() => {
+						dateDesc ? cprops.handlerDateDesc() : cprops.handlerDateAsc()
+						setDateDesc(dir => !dir)
+					}}
+				>
+					{text.btnSortByDate}
+				</Toggle>
+			</ButtonWrap>
+		</>
 	)
 }
 export default Sort
 
-const Button = (props, onClick) => {
+const Toggle = (props, onClick) => {
 	return(
-		<Toggle sortDirection={props.option} onClick={props.onClick}>
+		<Button sortDirection={props.option} onClick={props.onClick}>
 			<span>{props.children}</span>
-			{props.option
-				? <ArrowUpward/>
-				: <ArrowDownward/>
+			{props.option !== null
+					? props.option
+							? <ArrowUpward/>
+							: <ArrowDownward/>
+					: null
 			}
-		</Toggle>
+		</Button>
 	)
 }
-
-// const SortSc = styled.div`
-// 	outline: 1px dashed orange;
-// 	padding: 30px 0;
-// `
 const ButtonWrap = styled.div`
-	${mixins.flexRow};
+	${mixins.flexCentered};
 `
-const Toggle = styled.button`
-	margin-right: 15px;
+const Button = styled.button`
+	width: 130px;
 	background-color: ${props => props.sortDirection ? colors.lightestGray : colors.lightGray};
 	${mixins.button};
 	${mixins.flexCentered};
 	white-space: nowrap;
 	cursor: pointer;
+	&:first-child {
+		margin-right: 15px;
+	}
 `
-

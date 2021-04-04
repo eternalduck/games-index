@@ -2,5 +2,6 @@ desktop.ini
 *.DS_Store
 .idea
 .vscode
+report.*
 node_modules/
 build/

@@ -5,40 +5,8 @@ import {resetCss} from "./utils/_reset"
 
 const GlobalStyle = createGlobalStyle`
 	${resetCss}
-//////////TMP DEBUG/////////////////////
-	body:before {
-		content: "XS";
-		color: yellow;
-		position: fixed;
-		top: 5px;
-		right: 5px;
-		font-size: 14px;
-		z-index: 999999;
-		${media.sm`
-			content:"SM (min-width: 576)";
-			color: red;
-		`}
-		${media.md`
-			content:"MD (min-width: 750)";
-			color: cyan;
-		`}
-		${media.lg`
-			content:"LG (min-width: 990)";
-			color: orange;
-		`}
-		${media.xl`
-			content:"XL (min-width: 1200)";
-			color: lime;
-		`}
-	}
-//////////END TMP/////////////////////
-	
 	// 1. General
-	//html {
-	//	min-height: 100vh;
-	//}
 	body {
-		//height: 100%;
 		font-family: "Open Sans", sans-serif;
 		background: ${colors.darkGray};
 		color: ${colors.almostWhite};
@@ -46,8 +14,11 @@ const GlobalStyle = createGlobalStyle`
 		font-weight: 300;
 		line-height: 1.5;
 	}
+	.hover {
+		cursor: pointer;
+	}
 	// 2. Typography
-	h1, h2, h3, h4 {
+	h1, h2, h3 {
 		font-family: "Roboto Slab", serif;
 		font-weight: 700;
 		line-height: 1.3;
@@ -55,37 +26,14 @@ const GlobalStyle = createGlobalStyle`
 	h1 {
 		margin-bottom: 20px;
 		font-size: 2em;
-		//font-size: 28px;
-		// ${media.md`
-		// 	font-size: 30px;
-		// `}
-		// ${media.lg`
-		// 	font-size: 40px;
-		// `}
 	}
 	h2 {
 		margin-bottom: 15px;
 		font-size: 1.6em;
-		// font-size: 24px;
-		// ${media.md`
-		// 	font-size: 26px;
-		// `}
-		// ${media.lg`
-		// 	font-size: 36px;
-		// 	margin-bottom: 20px;
-		// `}
 	}
 	h3 {
 		margin-bottom: 15px;
 		font-size: 1.4em;
-		//font-size: 22px;
-		// ${media.md`
-		// 	font-size: 26px;
-		// `}
-		// ${media.lg`
-		// 	font-size: 30px;
-		// 	margin-bottom: 20px;
-		// `}
 	}
 	p {
 		font-size: 1em;
@@ -94,19 +42,16 @@ const GlobalStyle = createGlobalStyle`
 	b, strong {
 		font-weight: 600;
 	}
+	i {
+		font-style: italic;
+	}
 	a {
 		text-decoration: none;
 		&:hover {
 			text-decoration: underline;
 		}
 	}
-	// end typo
 
-	.hover {
-		cursor: pointer;
-	}
-	
-	
 `//createGlobalStyle
 
 export default GlobalStyle

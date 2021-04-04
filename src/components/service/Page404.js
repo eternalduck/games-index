@@ -1,6 +1,7 @@
 import React from "react"
 import {useHistory} from "react-router-dom"
 import styled from "styled-components"
+import {mixins} from "../../style/vars-mixins/_index"
 
 const Page404 = (props) => {
 	const history = useHistory()
@@ -9,7 +10,7 @@ const Page404 = (props) => {
 	return(
 		<Error>
 			<ErrorTxt>
-				<h1>not found</h1><br/>
+				<h2>{props.reason}</h2><br/>
 				<p>A fatal exception 0E has occured at 0x000000FF: 42954C6A<br/>the current page will be terminated.</p>
 				<p>* Press <Back onClick={goBack()}><span>any link</span></Back> to go to another page.<br/>
 				* Press CTRL+ALT+DELETE again to restart your computer.<br/>
@@ -23,10 +24,10 @@ const Page404 = (props) => {
 export default Page404
 
 const Error = styled.div`
-	width: 100vw;
-	height: 100vh;
-	display: flex;
+	width: 100%;
+	height: 100%;
 	background: navy;
+	${mixins.flexCentered};
 `
 const ErrorTxt = styled.div`
 	text-align: center;
@@ -35,11 +36,11 @@ const ErrorTxt = styled.div`
 	flex: 0 0 80%;
 	max-width: 600px;
 	margin: auto;
-	h1 {
+	h2 {
 		display: inline-block;
 		padding: 0 10px;
-		margin-bottom: 15px;
-		font-size: 19px;
+		margin-bottom: 30px;
+		font-size: 24px;
 		color: navy;
 		background: #fff;
 	}
@@ -54,7 +55,6 @@ const ErrorTxt = styled.div`
 		}
 	}
 `
-
 const Back = styled.span`
 	color: #fff;
 	cursor: pointer;
