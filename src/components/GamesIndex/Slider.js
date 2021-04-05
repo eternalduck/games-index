@@ -42,7 +42,7 @@ const SplideSlideSc = styled(SplideSlide)`
 	overflow: hidden;
 	background-color: ${colors.transparentWhite};
 	color: ${colors.midGray};
-	border-radius: 5px;
+	${mixins.borderRadius};
 `
 const Img = styled.img`
 	width: 100%;

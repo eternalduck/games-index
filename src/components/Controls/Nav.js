@@ -12,7 +12,6 @@ const Nav = (props) => {
 	const [prevPage, setPrevPage] = useGlobalState("prevPage")
 	const [nextPage, setNextPage] = useGlobalState("nextPage")
 
-	// TODO: replace this with infinite scroll
 	const turnThePage = async(newPageUrl) => {
 		if (newPageUrl) {
 			setIsNavLoading(true)
@@ -25,34 +24,23 @@ const Nav = (props) => {
 		}
 	}
 
-
-	// TODO: infinite scroll based on detection of the lower edge of the games list & calling turnThePage(); we also need to clean first items if the page grows too long..
+	// UNFINISHED: infinite scroll based on detection of the lower edge of the games list & calling turnThePage(); we also need to clean first items if the page grows too long..
 	// useEffect(() => {
-	// Catch the moment we have scrolled to the bottom of mainGamesList <ListWrap>
-	// const detectEnd = () => {
-	// 	let scrollTop
-	// 	let winHeight = window.innerHeight
-	// 	let listHeight
-	// 	window.addEventListener("scroll", function () {
-	// 		listHeight = mainGamesList.current.clientHeight
-	// 		scrollTop = window.pageYOffset
-	// 		if (scrollTop + 1000 > listHeight) {
-	// 			mainGamesList.current.style.outline = "3px solid magenta"
-	// 			turnThePage("next")
-	// 		}
-	//
-	// 			////
-	// 			console.info(
-	// 		`
-	// 				scrollTop: ${scrollTop}
-	// 				winHeight: ${winHeight}
-	// 				listHeight: ${listHeight}
-	// 				`
-	// 		)//DEBUG
-	//
-	// 	})//scroll
-	// }
-	// 	// detectEnd()//TODO inf scroll
+	// //Catch the moment we have scrolled to the bottom of <ListWrap>
+	// 	const detectEnd = () => {
+	// 		let scrollTop
+	// 		let winHeight = window.innerHeight
+	// 		let listHeight
+	// 		window.addEventListener("scroll", function () {
+	// 			listHeight = mainGamesList.current.clientHeight
+	// 			scrollTop = window.pageYOffset
+	// 			if (scrollTop + 1000 > listHeight) {
+	// 				mainGamesList.current.style.outline = "3px solid magenta"
+	// 				turnThePage("next")
+	// 			}
+	// 		})//scroll
+	// 	}
+	// 	// detectEnd()
 	// 	// return () => window.removeEventListener("scroll", detectEnd)
 	// }, [])
 

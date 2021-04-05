@@ -29,17 +29,16 @@ const IndexPage = (props) => {
 	}, [])
 
 	useEffect(() => {
+	//populate games list []
+	const processGamesList = () => {
 		if (gamesData) {
-			const processGamesList = () => {
 				const games = gamesData.results
-				setGamesList(games)//populate games list []
-				// setGamesList(list => [...list, games])//TODO append state for inf scroll
-				// setGamesList(list => list.concat(games))
-				setPrevPage(gamesData.previous)// get prev page
-				setNextPage(gamesData.next)// get next page
+				setGamesList(games)
+				setPrevPage(gamesData.previous)
+				setNextPage(gamesData.next)
 			}
-			processGamesList()
 		}
+		processGamesList()
 	}, [gamesData, isLoading])
 
 	return (
@@ -83,4 +82,5 @@ const ItemWrap = styled.div`
 `
 const MiniBsod = styled.div`
 	height: 500px;
+	margin-top: 50px;
 `

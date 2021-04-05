@@ -12,9 +12,12 @@ const Sort = (props) => {
 	const [gamesData, setGamesData] = useGlobalState("gamesData")
 	const [isLoading, setIsLoading] = useGlobalState("isLoading")
 	const [currentPage, setCurrentPage] = useGlobalState("currentPage")
+	const [searchTerm, setSearchTerm] = useGlobalState("searchTerm")
 
-	// TODO: We fetch api again and reset all content, lose page number, etc.. should we instead sort what's already loaded ?..
 	const doSorting = async(url) => {
+		if (searchTerm !== "") {// sort searched results
+			url = `${url}&search=${searchTerm}`
+		}
 		await apiCall(setGamesData, setIsLoading, url)//setIsLoading fails
 		setCurrentPage(1)
 	}

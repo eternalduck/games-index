@@ -11,6 +11,7 @@ const Filter = () => {
 	const [currentPage, setCurrentPage] = useGlobalState("currentPage")
 	const [platformId, setPlatformId] = useState(null)
 	const [platformsData, setPlatformsData] = useState(null)
+	const [searchTerm, setSearchTerm] = useGlobalState("searchTerm")
 
 	// Fetch a list of parent platforms
 	useEffect(() => {
@@ -23,9 +24,15 @@ const Filter = () => {
 	// Fetch by selected platform
 	useEffect(() => {
 		const filterByPlatform = async() => {
-			const url = `${requestURLs.URLgamesByPlatform}${platformId}`
+			let url
+			if (searchTerm !== "") {// filter searched results
+				url = `${requestURLs.URLgamesByPlatform}${platformId}&search=${searchTerm}`
+			} else {
+				url = `${requestURLs.URLgamesByPlatform}${platformId}`
+			}
 			platformId && await apiCall(setGamesData, setIsLoading, url)//setIsLoading fails
 			setCurrentPage(1)
+			console.info(searchTerm)
 		}
 		filterByPlatform()
 	}, [platformId])

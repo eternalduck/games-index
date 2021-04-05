@@ -83,6 +83,9 @@ export const mixins = {
 	`,
 
 //// 2.3 Common Elements
+	borderRadius: css`
+		border-radius: 5px;
+	`,
 	blackGradient: css`
 		background: linear-gradient(360deg, #1C1E22 10%, rgba(31, 32, 34, 0.77) 36.38%, rgba(28, 30, 34, 0.65) 57.84%, #111 95.02%);
 	`,

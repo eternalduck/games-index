@@ -46,10 +46,10 @@ const GameItem = (props) => {
 export default GameItem
 
 const Item = styled.div`
-	border: 1px solid ${colors.midGray};
-	border-radius: 5px;
-	padding: 15px;
 	height: 100%;
+	padding: 15px;
+	border: 1px solid ${colors.midGray};
+	${mixins.borderRadius};
 	${mixins.hoverTransition};
 	&:hover {
 		border-color: ${colors.mint};
@@ -63,7 +63,7 @@ const ImageLink = styled(Link)`
 	overflow: hidden;
 	background-color: ${colors.transparentWhite};
 	color: ${colors.midGray};
-	border-radius: 5px;
+	${mixins.borderRadius};
 	img {
 		width: 100%;
 		height: 100%;

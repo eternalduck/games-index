@@ -111,10 +111,13 @@ const Title = styled.h1`
 	text-align: center;
 `
 const Info = styled.div`
+	//background-color: ${colors.transparentBlack};
+	//padding: 40px 30px;
 	position: relative;
 	${mixins.centered};
-	max-width: 600px;
+	max-width: 800px;
 	z-index: 10;
+	${mixins.borderRadius};
 `
 const Details = styled.div`
 	font-size: 22px;

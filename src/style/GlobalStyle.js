@@ -19,7 +19,6 @@ const GlobalStyle = createGlobalStyle`
 	}
 	// 2. Typography
 	h1, h2, h3 {
-		font-family: "Roboto Slab", serif;
 		font-weight: 700;
 		line-height: 1.3;
 	}
