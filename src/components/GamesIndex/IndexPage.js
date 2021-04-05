@@ -87,6 +87,16 @@ const IndexPage = (props) => {
 		}
 	}
 
+	// Control: Filter by platform with lifted props
+	useEffect(() => {
+		const filterByPlatform = async() => {
+			const url = `${requestURLs.URLgamesByPlatform}${platformId}`
+			platformId && await apiCall(setGamesData, setIsLoading, url)//setIsLoading fails
+			setCurrentPage(1)
+		}
+		filterByPlatform()
+	}, [platformId])
+
 	// Control: Sorting TODO move all this to Sort.js but how to pass argument function?
 	// We fetch api again and reset all content, lose page number, etc.. should we instead fetch what's already loaded ?..
 	const doSorting = async(url) => {
@@ -108,15 +118,6 @@ const IndexPage = (props) => {
 		doSearch()
 	}, [search])
 
-	// Control: Filter by platform with lifted props
-	useEffect(() => {
-		const filterByPlatform = async() => {
-			const url = `${requestURLs.URLgamesByPlatform}${platformId}`
-			platformId && await apiCall(setGamesData, setIsLoading, url)//setIsLoading fails
-			setCurrentPage(1)
-		}
-		filterByPlatform()
-	}, [platformId])
 
 	return (
 		<>
@@ -129,7 +130,6 @@ const IndexPage = (props) => {
 					setSearch={term => setSearch(term)}
 					search={search}
 					setPlatformId={pl => setPlatformId(pl)}
-					// platform={platform}
 				/>
 				{gamesData && gamesData.count === 0
 					? <MiniBsod>
@@ -137,8 +137,8 @@ const IndexPage = (props) => {
 						</MiniBsod>
 					: <>
 						<Nav
-							next={() => turnThePage(next)}//tmp
-							prev={() => turnThePage(prev)}//tmp
+							goNext={() => turnThePage(next)}//tmp
+							goPrev={() => turnThePage(prev)}//tmp
 							loading={isNavLoading}
 							currentPage={currentPage}
 						/>
@@ -153,8 +153,8 @@ const IndexPage = (props) => {
 							}
 						</ListWrap>
 						<Nav
-							next={() => turnThePage(next)}
-							prev={() => turnThePage(prev)}
+							goNext={() => turnThePage(next)}
+							goPrev={() => turnThePage(prev)}
 							loading={isNavLoading}
 							currentPage={currentPage}
 							onClick={window.scrollTo(0, 0)}

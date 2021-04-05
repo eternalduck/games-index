@@ -61,6 +61,7 @@ const ImageLink = styled(Link)`
 	margin: 0 auto 20px;
 	overflow: hidden;
 	background-color: ${colors.transparentWhite};
+	color: ${colors.midGray};
 	border-radius: 5px;
 	img {
 		width: 100%;
@@ -71,7 +72,7 @@ const ImageLink = styled(Link)`
 	}
 `
 const NoImg = styled.span`
-	color: ${colors.midGray};
+	// color: ${colors.midGray};
 	text-align: center;
 `
 

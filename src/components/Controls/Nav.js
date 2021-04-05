@@ -2,27 +2,25 @@ import React from "react"
 import styled from "styled-components"
 import {media, mixins} from "../../style/vars-mixins/_index"
 import {ArrowBack, ArrowForward, Autorenew} from "@material-ui/icons"
-import {text} from "../data/text"
 
 const Nav = (props) => {
 	return (
 		<Navbar>
-			{props.prev &&
+			{props.goPrev &&
 				<ArrowBack
-					onClick={props.prev}
-					fontSize="large"
+					onClick={props.goPrev}
 					className={"hover"}
 				/>
 			}
-			<Page>{props.loading
-				? <Autorenew/>
-				: <span>{props.currentPage}</span>
-			}
+			<Page>
+				{props.loading
+					? <Autorenew fontSize={"small"}/>
+					: <span>{props.currentPage}</span>
+				}
 			</Page>
-			{props.next &&
+			{props.goNext &&
 				<ArrowForward
-					onClick={props.next}
-					fontSize="large"
+					onClick={props.goNext}
 					className={"hover"}
 				/>
 			}
@@ -35,13 +33,14 @@ const Navbar = styled.nav`
 	margin: 30px 0;
 	${mixins.flexRow};
 	${media.lg`
-		justify-content: center;
+		${mixins.flexCentered};
 	`}
 `
 const Page = styled.p`
-	width: 120px;
+	width: 200px;
 	text-align: center;
-	font-size: 20px;
+	font-size: 18px;
+	line-height: 1;
 	font-weight: bold;
-	margin: 0 40px;
+	margin-bottom: 0;
 `
