@@ -95,17 +95,14 @@ const Gamepage = styled.article`
 	padding: 40px 0;
 `
 const Cover = styled.div`
-	display: none;//hide on mob due to heavy img
-	${media.md`
-		display: block;
-		background: url(${props => props.bg}) center top/cover no-repeat;
-		position: absolute;
-		width: 100%;
-		height: 55vh;
-		top: ${sizes.headerHeight};
-		left: 0;
-		z-index: 1;
-	`}
+	display: block;
+	background: url(${props => props.bg}) center top/cover no-repeat;
+	position: absolute;
+	width: 100%;
+	height: 55vh;
+	top: ${sizes.headerHeight};
+	left: 0;
+	z-index: 1;
 	&:before {
 		${mixins.defaultPseudo()};
 		${mixins.blackGradient};

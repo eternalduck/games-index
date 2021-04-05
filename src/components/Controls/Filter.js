@@ -24,7 +24,6 @@ const Filter = () => {
 			const processPlatformsList = () => {
 				const platforms = platformsData.results
 				setPlatformsList(platforms)
-				// console.info("processPlatformsList run")
 			}
 			processPlatformsList()
 		}
@@ -33,14 +32,12 @@ const Filter = () => {
 
 	return (
 		<>
-			<Select>
+			<Select onChange={e => cprops.setPlatformId(e.target.value)} value={""}>
 				<option value={""}>{text.labelSelectPlatform}</option>
 				{!isLoading &&
 					platformsList && platformsList.map(pl =>
-						<option key={pl.id}
-							onClick={e => cprops.setPlatform(pl.id)}
-							value={pl.id}
-						>{pl.name}
+						<option key={pl.id} value={pl.id}>
+							{pl.name}
 						</option>
 					)
 				}

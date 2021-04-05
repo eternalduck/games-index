@@ -6,7 +6,6 @@ import {text} from "../data/text"
 import {Accessibility} from "@material-ui/icons"
 
 const GameItem = (props) => {
-
 	const getPoster = (gameBg) => {
 		if (gameBg) {
 			const poster = gameBg.match(/media\/screenshots/)

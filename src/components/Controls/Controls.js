@@ -7,7 +7,6 @@ import Search from "./Search"
 import ControlContext from "./ControlContext"
 
 const Controls = (props) => {
-
 	return (
 		<ControlContext.Provider value={props}>
 			<Container>

@@ -12,7 +12,6 @@ import Page404 from "../service/Page404"
 
 
 const IndexPage = (props) => {
-
 	const mainGamesList = useRef()
 	const [isLoading, setIsLoading] = useState(true)
 	const [isNavLoading, setIsNavLoading] = useState(false)
@@ -22,9 +21,10 @@ const IndexPage = (props) => {
 	const [prev, setPrev] = useState(null)
 	const [next, setNext] = useState(null)
 	const [search, setSearch] = useState("")
-	const [platform, setPlatform] = useState(null)
+	const [platformId, setPlatformId] = useState(null)
 
 // TODO don't load if was already loaded once & save page num when returning from game page
+	// Main content fetching
 	const getGamesData = async() => {
 		await apiCall(setGamesData, setIsLoading, requestURLs.URLgamesList)
 	}
@@ -57,7 +57,6 @@ const IndexPage = (props) => {
 	// }
 	// 	// detectEnd()//TODO inf scroll
 	// 	// return () => window.removeEventListener("scroll", detectEnd)
-
 	}, [])
 
 	useEffect(() => {
@@ -74,7 +73,8 @@ const IndexPage = (props) => {
 		}
 	}, [gamesData, isLoading])
 
-	//TODO: replace with infinite scroll based on detection of the lower edge of the games list & calling turnThePage(); we also need to clean first items if the page grows too long..
+	// TODO: replace with infinite scroll based on detection of the lower edge of the games list & calling turnThePage(); we also need to clean first items if the page grows too long..
+	// Control: Paging
 	const turnThePage = async(newPageUrl) => {
 		if (newPageUrl) {
 			setIsNavLoading(true)
@@ -87,14 +87,14 @@ const IndexPage = (props) => {
 		}
 	}
 
-	// Sorting controls, TODO move all this to Sort.js but how to pass argument function?
+	// Control: Sorting TODO move all this to Sort.js but how to pass argument function?
 	// We fetch api again and reset all content, lose page number, etc.. should we instead fetch what's already loaded ?..
 	const doSorting = async(url) => {
 		await apiCall(setGamesData, setIsLoading, url)//setIsLoading fails
 		setCurrentPage(1)
 	}
 
-	// Search control with lifted props
+	// Control: Search with lifted props
 	useEffect(() => {
 		const doSearch = async() => {
 			if (search !== "") {
@@ -108,16 +108,15 @@ const IndexPage = (props) => {
 		doSearch()
 	}, [search])
 
-	// Platform filter with lifted props
+	// Control: Filter by platform with lifted props
 	useEffect(() => {
 		const filterByPlatform = async() => {
-			const url = `${requestURLs.URLgamesByPlatform}${platform}`
-			platform && await apiCall(setGamesData, setIsLoading, url)//setIsLoading fails
+			const url = `${requestURLs.URLgamesByPlatform}${platformId}`
+			platformId && await apiCall(setGamesData, setIsLoading, url)//setIsLoading fails
 			setCurrentPage(1)
 		}
 		filterByPlatform()
-		console.info(platform)
-	}, [platform])
+	}, [platformId])
 
 	return (
 		<>
@@ -129,7 +128,7 @@ const IndexPage = (props) => {
 					handlerDateAsc={() => doSorting(requestURLs.URLreleasedAsc)}
 					setSearch={term => setSearch(term)}
 					search={search}
-					setPlatform={pl => setPlatform(pl)}
+					setPlatformId={pl => setPlatformId(pl)}
 					// platform={platform}
 				/>
 				{gamesData && gamesData.count === 0
