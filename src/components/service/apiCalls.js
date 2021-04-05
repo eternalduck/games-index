@@ -13,10 +13,10 @@ export const requestURLs = {
 	URLsearch: `https://api.rawg.io/api/games?page_size=${pageSize}&key=${API_KEY}&search=`,
 	URLplatforms: `https://api.rawg.io/api/platforms/lists/parents?key=${API_KEY}`,
 	URLgamesByPlatform: `https://api.rawg.io/api/games?page_size=${pageSize}&key=${API_KEY}&parent_platforms=`,
-	// URLplatforms: `https://api.rawg.io/api/platforms?key=${API_KEY}`,
+
 }
 
-// Some component's setState & loading detector are passed as handlers
+// Component's setState & loading detector are passed as handlers
 export const apiCall = async(handler, loadingHandler, url) => {
 	loadingHandler && loadingHandler(true)// reset loading
 	try {

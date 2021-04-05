@@ -1,39 +1,49 @@
-import React, {useState, useEffect, useContext} from "react"
+import React, {useState} from "react"
+import {useGlobalState} from "../service/globalState"
+import {requestURLs, apiCall} from "../service/apiCalls"
+import {ArrowUpward, ArrowDownward} from "@material-ui/icons"
 import styled from "styled-components"
 import {colors, mixins} from "../../style/vars-mixins/_index"
-import {ArrowUpward, ArrowDownward} from "@material-ui/icons"
 import {text} from "../data/text"
-import ControlContext from "./ControlContext"
 
 const Sort = (props) => {
-	// State to change buttons icons, empty on load
 	const [ratingDesc, setRatingDesc] = useState(null)
 	const [dateDesc, setDateDesc] = useState(null)
-	const cprops = useContext(ControlContext)
+	const [gamesData, setGamesData] = useGlobalState("gamesData")
+	const [isLoading, setIsLoading] = useGlobalState("isLoading")
+	const [currentPage, setCurrentPage] = useGlobalState("currentPage")
+
+	// TODO: We fetch api again and reset all content, lose page number, etc.. should we instead sort what's already loaded ?..
+	const doSorting = async(url) => {
+		await apiCall(setGamesData, setIsLoading, url)//setIsLoading fails
+		setCurrentPage(1)
+	}
 
 	return (
-		<>
-			<ButtonWrap>
-				<Toggle
-					option={ratingDesc}
-					onClick={() => {
-						ratingDesc ? cprops.handlerRatingDesc() : cprops.handlerRatingAsc()
-						setRatingDesc(dir => !dir)
-					}}
-				>
-					{text.btnSortByRating}
-				</Toggle>
-				<Toggle
-					option={dateDesc}
-					onClick={() => {
-						dateDesc ? cprops.handlerDateDesc() : cprops.handlerDateAsc()
-						setDateDesc(dir => !dir)
-					}}
-				>
-					{text.btnSortByDate}
-				</Toggle>
-			</ButtonWrap>
-		</>
+		<ButtonWrap>
+			<Toggle
+				option={ratingDesc}
+				onClick={() => {
+					ratingDesc
+						? doSorting(requestURLs.URLratingDesc)
+						: doSorting(requestURLs.URLratingAsc)
+					setRatingDesc(dir => !dir)
+				}}
+			>
+				{text.btnSortByRating}
+			</Toggle>
+			<Toggle
+				option={dateDesc}
+				onClick={() => {
+					dateDesc
+						? doSorting(requestURLs.URLreleasedDesc)
+						: doSorting(requestURLs.URLreleasedAsc)
+					setDateDesc(dir => !dir)
+				}}
+			>
+				{text.btnSortByDate}
+			</Toggle>
+		</ButtonWrap>
 	)
 }
 export default Sort
@@ -43,10 +53,10 @@ const Toggle = (props, onClick) => {
 		<Button sortDirection={props.option} onClick={props.onClick}>
 			<span>{props.children}</span>
 			{props.option !== null
-					? props.option
-							? <ArrowUpward/>
-							: <ArrowDownward/>
-					: null
+				? props.option
+						? <ArrowUpward/>
+						: <ArrowDownward/>
+				: null
 			}
 		</Button>
 	)

@@ -15,7 +15,7 @@ export {default as media} from "./_media"
 //// 1. Colors
 export const colors = {
 	almostWhite: "#eeefee",
-	almostBlack: "#222",
+	almostBlack: "#111",
 	darkGray: "#1C1E22",
 	midGray: "#909399",
 	lightGray: "#C5C8D0",
@@ -84,7 +84,7 @@ export const mixins = {
 
 //// 2.3 Common Elements
 	blackGradient: css`
-		background: linear-gradient(360deg, #1C1E22 10%, rgba(31, 32, 34, 0.77) 36.38%, rgba(28, 30, 34, 0.65) 57.84%, #222222 95.02%);
+		background: linear-gradient(360deg, #1C1E22 10%, rgba(31, 32, 34, 0.77) 36.38%, rgba(28, 30, 34, 0.65) 57.84%, #111 95.02%);
 	`,
 	hoverOpacity: css`
 		transition: opacity .2s ease-in;

@@ -1,5 +1,4 @@
 import React from "react"
-import {Link} from "react-router-dom"
 import styled from "styled-components"
 import {colors, mixins, sizes} from "../../style/vars-mixins/_index"
 import {SportsHandball} from "@material-ui/icons"

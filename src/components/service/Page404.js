@@ -20,7 +20,6 @@ const Page404 = (props) => {
 		</Error>
 	)
 }
-
 export default Page404
 
 const Error = styled.div`

@@ -2,10 +2,11 @@ import React from "react"
 import {Link} from "react-router-dom"
 import styled from "styled-components"
 import {colors, mixins} from "../../style/vars-mixins/_index"
-import {text} from "../data/text"
 import {Accessibility} from "@material-ui/icons"
+import {text} from "../data/text"
 
 const GameItem = (props) => {
+	// Cheat to retrieve a small game preview by background_image path
 	const getPoster = (gameBg) => {
 		if (gameBg) {
 			const poster = gameBg.match(/media\/screenshots/)
@@ -30,18 +31,18 @@ const GameItem = (props) => {
 					</Link>
 				</Title>
 				<>
-					<p>{text.labelRating} <b>{props.game.rating}</b></p>
-					{/*FAIL make date nicer!!*/}
-					<p>{text.labelDate} <b>{props.game.released}</b></p>
-					<p><i>{props.game.parent_platforms.map(pl =>
-						<span key={pl.platform.id}>{pl.platform.name}, </span>
-					)}</i></p>
+					<Rating>{text.labelRating} <span>{props.game.rating}</span></Rating>
+					<Date>{text.labelDate} <span>{props.game.released}</span></Date>
+					<Platforms>
+						{props.game.parent_platforms.map(pl =>
+							<span key={pl.platform.id}>{pl.platform.name}</span>
+						)}
+					</Platforms>
 				</>
 			</Txt>
 		</Item>
 	)
 }
-
 export default GameItem
 
 const Item = styled.div`
@@ -72,10 +73,8 @@ const ImageLink = styled(Link)`
 	}
 `
 const NoImg = styled.span`
-	// color: ${colors.midGray};
 	text-align: center;
 `
-
 const Txt = styled.div`
 	& a {
 		color: ${colors.green}
@@ -88,6 +87,26 @@ const Title = styled.h3`
 		&:hover {
 			color: ${colors.mint};
 			transition: color .15s ease-in;
+		}
+	}
+`
+const Rating = styled.p`
+	color: ${colors.peach};
+	span {font-weight: bold;}
+`
+const Date = styled.p`
+	span {font-weight: bold;}
+`
+const Platforms = styled.p`
+	font-style: italic;
+	color: ${colors.lightGray};
+	margin-top: 20px;
+	span {
+		&:after {
+			content: ", ";
+		}
+		&:last-child:after {
+			content: "";
 		}
 	}
 `

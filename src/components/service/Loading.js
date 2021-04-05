@@ -33,4 +33,3 @@ const CloudDownloadIconSc = styled(CloudDownloadIcon)`
 	animation: ${scale} 1.2s linear infinite;
 	font-size: 60px !important;
 `
-

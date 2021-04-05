@@ -1,48 +1,44 @@
-import React, {useState, useEffect, useContext} from "react"
+import React, {useState, useEffect, useMemo} from "react"
+import {useGlobalState} from "../service/globalState"
+import {requestURLs, apiCall} from "../service/apiCalls"
 import styled from "styled-components"
 import {media, colors, mixins} from "../../style/vars-mixins/_index"
 import {text} from "../data/text"
-import {requestURLs, apiCall} from "../service/apiCalls"
-import ControlContext from "./ControlContext"
-
 
 const Filter = () => {
-	const cprops = useContext(ControlContext)
-	const [platformsData, setPlatformsData] = useState({})
-	const [platformsList, setPlatformsList] = useState({})
-	const [isLoading, setIsLoading] = useState(true)
+	const [gamesData, setGamesData] = useGlobalState("gamesData")
+	const [isLoading, setIsLoading] = useGlobalState("isLoading")
+	const [currentPage, setCurrentPage] = useGlobalState("currentPage")
+	const [platformId, setPlatformId] = useState(null)
+	const [platformsData, setPlatformsData] = useState(null)
 
+	// Fetch a list of parent platforms
 	useEffect(() => {
-		const getPlatformsData = async() => {
-			await apiCall(setPlatformsData, setIsLoading, requestURLs.URLplatforms)
+		const getPlatformsList = async() => {
+			await apiCall(setPlatformsData, undefined, requestURLs.URLplatforms)
 		}
-		getPlatformsData()
+		getPlatformsList()
 	}, [])
 
+	// Fetch by selected platform
 	useEffect(() => {
-		if (platformsData) {
-			const processPlatformsList = () => {
-				const platforms = platformsData.results
-				setPlatformsList(platforms)
-			}
-			processPlatformsList()
+		const filterByPlatform = async() => {
+			const url = `${requestURLs.URLgamesByPlatform}${platformId}`
+			platformId && await apiCall(setGamesData, setIsLoading, url)//setIsLoading fails
+			setCurrentPage(1)
 		}
-	}, [platformsData])
-
+		filterByPlatform()
+	}, [platformId])
 
 	return (
-		<>
-			<Select onChange={e => cprops.setPlatformId(e.target.value)} value={""}>
-				<option value={""}>{text.labelSelectPlatform}</option>
-				{!isLoading &&
-					platformsList && platformsList.map(pl =>
-						<option key={pl.id} value={pl.id}>
-							{pl.name}
-						</option>
-					)
-				}
-			</Select>
-		</>
+		<Select onChange={e => setPlatformId(e.target.value)} value={""}>
+			<option value={""}>{text.labelSelectPlatform}</option>
+			{platformsData && platformsData.results.map(pl =>
+				<option key={pl.id} value={pl.id}>
+					{pl.name}
+				</option>
+			)}
+		</Select>
 	)
 }
 export default Filter

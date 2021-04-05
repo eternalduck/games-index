@@ -30,7 +30,6 @@ const Slider = (props) => {
 }
 export default Slider
 
-
 const SliderWrap = styled.div`
 	padding-top: 30px;
 	overflow: hidden;
