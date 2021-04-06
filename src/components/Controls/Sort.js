@@ -13,13 +13,16 @@ const Sort = (props) => {
 	const [isLoading, setIsLoading] = useGlobalState("isLoading")
 	const [currentPage, setCurrentPage] = useGlobalState("currentPage")
 	const [searchTerm, setSearchTerm] = useGlobalState("searchTerm")
+	const [platformId, setPlatformId] = useGlobalState("platformId")
 
 	const doSorting = async(url) => {
-		if (searchTerm !== "") {// sort searched results
+		// sort search results, platform should be taken into account too but I failed)
+		if (searchTerm !== "") {
 			url = `${url}&search=${searchTerm}`
 		}
-		await apiCall(setGamesData, setIsLoading, url)//setIsLoading fails
+		await apiCall(setGamesData, setIsLoading, url)
 		setCurrentPage(1)
+
 	}
 
 	return (

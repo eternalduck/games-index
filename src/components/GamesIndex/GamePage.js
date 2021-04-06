@@ -21,10 +21,10 @@ const GamePage = (props) => {
 	const urlScreens = `https://api.rawg.io/api/games/${slug}/screenshots?key=${API_KEY}`
 
 	useEffect(() => {
-		const getGame = async() => {
+		const getGame = async () => {
 			try {
-			await apiCall(setGame, undefined, urlGame)
-			} catch(e) {
+				await apiCall(setGame, undefined, urlGame)
+			} catch (e) {
 				console.error("aaa game fetch failed!")
 			}
 		}
@@ -32,10 +32,10 @@ const GamePage = (props) => {
 	}, [])
 
 	useEffect(() => {
-		const getScreens = async() => {
+		const getScreens = async () => {
 			try {
-			await apiCall(setScreens, undefined, urlScreens)
-			} catch(e) {
+				await apiCall(setScreens, undefined, urlScreens)
+			} catch (e) {
 				console.error("aaa screens fetch failed!")
 			}
 		}
@@ -44,39 +44,39 @@ const GamePage = (props) => {
 
 	return (
 		<Layout>
-		{game && game.detail === "Not found."
-			? <BigBsod>
+			{game && game.detail === "Not found."
+				? <BigBsod>
 					<Page404 reason={text.noGame}/>
 				</BigBsod>
-			: <>{!game
-				? <Loading/>
-				: <Gamepage>
-						{game.background_image &&
+				: <>{!game
+						? <Loading/>
+						: <Gamepage>
+							{game.background_image &&
 							<Cover bg={game.background_image}/>
-						}
-						<Info>
-							<LinkSc to={"/"}><ArrowBack/></LinkSc>
-							<Title>{game.name}</Title>
-							<Details>
-								<p>{text.labelRating} <b>{game.rating}</b></p>
-								<p>{text.labelDate} <b>{game.released}</b></p>
-								<Platforms>
-									{game.parent_platforms.map(pl =>
-										<span key={pl.platform.id}>{pl.platform.name}</span>
-									)}
-								</Platforms>
-								<a href={game.website} target="_blank" rel="noreferrer">
-									{text.labelWebsite}
-								</a>
-							</Details>
-							<Description dangerouslySetInnerHTML={{__html: game.description}}/>
-						</Info>
-						{screens && screens.results.length !== 0 &&
+							}
+							<Info>
+								<LinkSc to={"/"}><ArrowBack/></LinkSc>
+								<Title>{game.name}</Title>
+								<Details>
+									<p>{text.labelRating} <b>{game.rating}</b></p>
+									<p>{text.labelDate} <b>{game.released}</b></p>
+									<Platforms>
+										{game.parent_platforms.map(pl =>
+												<span key={pl.platform.id}>{pl.platform.name}</span>
+										)}
+									</Platforms>
+									<a href={game.website} target="_blank" rel="noreferrer">
+										{text.labelWebsite}
+									</a>
+								</Details>
+								<Description dangerouslySetInnerHTML={{__html: game.description}}/>
+							</Info>
+							{screens && screens.results.length !== 0 &&
 							<Slider screens={screens.results}/>
-						}
-					</Gamepage>
-			}</>
-		}
+							}
+						</Gamepage>
+				}</>
+			}
 		</Layout>
 	)
 }
@@ -101,6 +101,7 @@ const Cover = styled.div`
 	top: ${sizes.headerHeight};
 	left: 0;
 	z-index: 1;
+
 	&:before {
 		${mixins.defaultPseudo()};
 		${mixins.blackGradient};
@@ -111,7 +112,7 @@ const Title = styled.h1`
 	text-align: center;
 `
 const Info = styled.div`
-	//background-color: ${colors.transparentBlack};
+		//background-color: ${colors.transparentBlack};
 	//padding: 40px 30px;
 	position: relative;
 	${mixins.centered};
@@ -122,16 +123,19 @@ const Info = styled.div`
 const Details = styled.div`
 	font-size: 22px;
 	color: ${colors.peach};
+
 	a {
 		color: ${colors.lightGray};
 	}
 `
 const Platforms = styled.p`
 	font-style: italic;
+
 	span {
 		&:after {
 			content: ", ";
 		}
+
 		&:last-child:after {
 			content: "";
 		}

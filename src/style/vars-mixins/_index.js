@@ -16,7 +16,7 @@ export {default as media} from "./_media"
 export const colors = {
 	almostWhite: "#eeefee",
 	almostBlack: "#111",
-	darkGray: "#1C1E22",
+	darkGray: "#181E27",
 	midGray: "#909399",
 	lightGray: "#C5C8D0",
 	lightestGray: "#EEEFEE",
@@ -87,7 +87,7 @@ export const mixins = {
 		border-radius: 5px;
 	`,
 	blackGradient: css`
-		background: linear-gradient(360deg, #1C1E22 10%, rgba(31, 32, 34, 0.77) 36.38%, rgba(28, 30, 34, 0.65) 57.84%, #111 95.02%);
+		background: linear-gradient(180deg, #181E27 0%, rgba(14, 17, 22, 0.7) 50%, #111111 100%);
 	`,
 	hoverOpacity: css`
 		transition: opacity .2s ease-in;

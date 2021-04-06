@@ -9,41 +9,40 @@ const Filter = () => {
 	const [gamesData, setGamesData] = useGlobalState("gamesData")
 	const [isLoading, setIsLoading] = useGlobalState("isLoading")
 	const [currentPage, setCurrentPage] = useGlobalState("currentPage")
-	const [platformId, setPlatformId] = useState(null)
 	const [platformsData, setPlatformsData] = useState(null)
+	const [platformId, setPlatformId] = useGlobalState("platformId")
 	const [searchTerm, setSearchTerm] = useGlobalState("searchTerm")
 
 	// Fetch a list of parent platforms
 	useEffect(() => {
-		const getPlatformsList = async() => {
+		const getPlatformsList = async () => {
 			await apiCall(setPlatformsData, undefined, requestURLs.URLplatforms)
 		}
 		getPlatformsList()
 	}, [])
 
-	// Fetch by selected platform
+	// Fetch games by selected platform
 	useEffect(() => {
-		const filterByPlatform = async() => {
+		const filterByPlatform = async () => {
 			let url
-			if (searchTerm !== "") {// filter searched results
+			if (searchTerm !== "") {// filter search results
 				url = `${requestURLs.URLgamesByPlatform}${platformId}&search=${searchTerm}`
 			} else {
 				url = `${requestURLs.URLgamesByPlatform}${platformId}`
 			}
-			platformId && await apiCall(setGamesData, setIsLoading, url)//setIsLoading fails
+			platformId && await apiCall(setGamesData, setIsLoading, url)
 			setCurrentPage(1)
-			console.info(searchTerm)
 		}
 		filterByPlatform()
 	}, [platformId])
 
 	return (
 		<Select onChange={e => setPlatformId(e.target.value)} value={""}>
-			<option value={""}>{text.labelSelectPlatform}</option>
+			<option value={""} disabled>{text.labelSelectPlatform}</option>
 			{platformsData && platformsData.results.map(pl =>
-				<option key={pl.id} value={pl.id}>
-					{pl.name}
-				</option>
+					<option key={pl.id} value={pl.id}>
+						{pl.name}
+					</option>
 			)}
 		</Select>
 	)
@@ -52,5 +51,6 @@ export default Filter
 
 const Select = styled.select`
 	${mixins.input};
+	appearance: auto;
 	cursor: pointer;
 `

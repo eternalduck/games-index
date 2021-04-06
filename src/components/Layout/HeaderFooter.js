@@ -37,13 +37,13 @@ const HeaderSc = styled.header`
 	height: ${sizes.headerHeight};
 	position: relative;
 	padding: 25px 0;
-	background-color: ${colors.almostBlack};
+	background-color: ${colors.darkGray};
 	z-index: 50;
 `
 const FooterSc = styled.footer`
 	margin-top: 80px;
 	padding: 20px 0 15px;
-	background-color: ${colors.almostBlack};
+	background-color: ${colors.darkGray};
 	color: ${colors.midGray};
 	font-size: 14px;
 `

@@ -1,13 +1,16 @@
 import React from "react"
 import {Link} from "react-router-dom"
+import {useGlobalState} from "../service/globalState"
 import styled from "styled-components"
 import {colors, mixins} from "../../style/vars-mixins/_index"
 import {Accessibility} from "@material-ui/icons"
 import {text} from "../data/text"
 
 const GameItem = (props) => {
+	const [platformId, setPlatformId] = useGlobalState("platformId")
+
 	// Cheat to retrieve a small game preview by background_image path
-	const getPoster = (gameBg) => {
+	const getPoster = gameBg => {
 		if (gameBg) {
 			const poster = gameBg.match(/media\/screenshots/)
 				? gameBg.replace("media/screenshots", "media/resize/420/-/screenshots")
@@ -33,11 +36,13 @@ const GameItem = (props) => {
 				<>
 					<Rating>{text.labelRating} <span>{props.game.rating}</span></Rating>
 					<Date>{text.labelDate} <span>{props.game.released}</span></Date>
-					<Platforms>
-						{props.game.parent_platforms.map(pl =>
-							<span key={pl.platform.id}>{pl.platform.name}</span>
-						)}
-					</Platforms>
+					{platformId !== "" &&
+						<Platforms>
+							{props.game.parent_platforms.map(pl =>
+								<span key={pl.platform.id}>{pl.platform.name}</span>
+							)}
+						</Platforms>
+					}
 				</>
 			</Txt>
 		</Item>
@@ -110,4 +115,3 @@ const Platforms = styled.p`
 		}
 	}
 `
-

@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import {useGlobalState} from "../service/globalState"
 import {apiCall} from "../service/apiCalls"
 import {ArrowBack, ArrowForward, Autorenew} from "@material-ui/icons"
@@ -19,30 +19,10 @@ const Nav = (props) => {
 			// get current page
 			const urlParams = new URLSearchParams(newPageUrl)
 			const page = urlParams.get("page")
-			page ? setCurrentPage(page) : setCurrentPage(1)//FAIL
+			page ? setCurrentPage(page) : setCurrentPage(1)
 			setIsNavLoading(false)
 		}
 	}
-
-	// UNFINISHED: infinite scroll based on detection of the lower edge of the games list & calling turnThePage(); we also need to clean first items if the page grows too long..
-	// useEffect(() => {
-	// //Catch the moment we have scrolled to the bottom of <ListWrap>
-	// 	const detectEnd = () => {
-	// 		let scrollTop
-	// 		let winHeight = window.innerHeight
-	// 		let listHeight
-	// 		window.addEventListener("scroll", function () {
-	// 			listHeight = mainGamesList.current.clientHeight
-	// 			scrollTop = window.pageYOffset
-	// 			if (scrollTop + 1000 > listHeight) {
-	// 				mainGamesList.current.style.outline = "3px solid magenta"
-	// 				turnThePage("next")
-	// 			}
-	// 		})//scroll
-	// 	}
-	// 	// detectEnd()
-	// 	// return () => window.removeEventListener("scroll", detectEnd)
-	// }, [])
 
 	return (
 		<Navbar>

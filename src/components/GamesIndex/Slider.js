@@ -31,8 +31,10 @@ const Slider = (props) => {
 export default Slider
 
 const SliderWrap = styled.div`
+	position: relative;
 	padding-top: 30px;
 	overflow: hidden;
+	z-index: 10;
 	${media.lg`
 		padding-top: 50px;
 	`}

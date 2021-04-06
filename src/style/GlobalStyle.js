@@ -8,9 +8,9 @@ const GlobalStyle = createGlobalStyle`
 	// 1. General
 	body {
 		font-family: "Open Sans", sans-serif;
-		background: ${colors.darkGray};
+		background: ${colors.almostBlack};
 		color: ${colors.almostWhite};
-		font-size: calc(14px + (18 - 14) * ((100vw - 300px) / (1600 - 300)));
+		font-size: calc(16px + (18 - 16) * ((100vw - 300px) / (1600 - 300)));
 		font-weight: 300;
 		line-height: 1.5;
 	}

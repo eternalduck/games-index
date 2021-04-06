@@ -1,23 +1,26 @@
 import React from "react"
 import styled from "styled-components"
 import {media, colors, mixins} from "../../style/vars-mixins/_index"
+import ControlContext from "./ControlContext"
 import Filter from "./Filter"
 import Sort from "./Sort"
 import Search from "./Search"
 
 const Controls = (props) => {
 	return (
-		<Container>
-			<ControlWrap>
-				<Filter/>
-			</ControlWrap>
-			<SortWrap>
-				<Sort/>
-			</SortWrap>
-			<SearchWrap>
-				<Search/>
-			</SearchWrap>
-		</Container>
+		<ControlContext.Provider value={props}>
+			<Container>
+				<ControlWrap>
+					<Filter/>
+				</ControlWrap>
+				<SortWrap>
+					<Sort/>
+				</SortWrap>
+				<SearchWrap>
+					<Search/>
+				</SearchWrap>
+			</Container>
+		</ControlContext.Provider>
 	)
 }
 export default Controls

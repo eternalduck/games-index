@@ -7,5 +7,6 @@ export const {useGlobalState} = createGlobalState({
 	prevPage: null,
 	nextPage: null,
 	searchTerm: "",
+	platformId: "",
 
 })

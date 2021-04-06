@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef, useCallback, useMemo} from "react"
+import React, {useState, useEffect} from "react"
 import {useGlobalState} from "../service/globalState"
 import {requestURLs, apiCall} from "../service/apiCalls"
 import styled from "styled-components"
@@ -12,26 +12,25 @@ import Loading from "../service/Loading"
 import Page404 from "../service/Page404"
 
 const IndexPage = (props) => {
-	const mainGamesList = useRef()// for inf scroll
 	const [gamesData, setGamesData] = useGlobalState("gamesData")
 	const [isLoading, setIsLoading] = useGlobalState("isLoading")
 	const [prevPage, setPrevPage] = useGlobalState("prevPage")
 	const [nextPage, setNextPage] = useGlobalState("nextPage")
 	const [gamesList, setGamesList] = useState(null)
 
-	// TODO don't load if was already loaded once & save page num when returning from game page
-	useEffect(() => {
+	// it's better to use localStorage to save fetch results.. somehow
 	// Main content fetching
-		const getGamesData = async() => {
-			await apiCall(setGamesData, setIsLoading, requestURLs.URLgamesList)
-		}
+	const getGamesData = async() => {
+		await apiCall(setGamesData, setIsLoading, requestURLs.URLgamesList)
+	}
+	useEffect(() => {
 		getGamesData()
 	}, [])
 
 	useEffect(() => {
-	//populate games list []
-	const processGamesList = () => {
-		if (gamesData) {
+		//populate games list []
+		const processGamesList = () => {
+			if (gamesData) {
 				const games = gamesData.results
 				setGamesList(games)
 				setPrevPage(gamesData.previous)
@@ -43,16 +42,16 @@ const IndexPage = (props) => {
 
 	return (
 		<Layout>
-			<Controls/>
+			<Controls fetchOnSearchCleared={getGamesData}/>
 			{gamesData && gamesData.count === 0
 				? <MiniBsod>
 						<Page404 reason={text.noResults}/>
 					</MiniBsod>
 				: <>
 					<Nav/>
-					<ListWrap ref={mainGamesList}>{/*TODO ref used for inf scroll*/}
+					<ListWrap>
 						{!isLoading && gamesList
-							? gamesList && gamesList.map((game) =>
+							? gamesList && gamesList.map(game =>
 								<ItemWrap key={game.id}>
 									<GameItem game={game}/>
 								</ItemWrap>
