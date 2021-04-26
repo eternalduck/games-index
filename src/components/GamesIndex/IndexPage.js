@@ -20,8 +20,8 @@ const IndexPage = (props) => {
 
 	// it's better to use localStorage to save fetch results.. somehow
 	// Main content fetching
-	const getGamesData = async() => {
-		await apiCall(setGamesData, setIsLoading, requestURLs.URLgamesList)
+	const getGamesData = () => {
+		apiCall(setGamesData, setIsLoading, requestURLs.URLgamesList)
 	}
 	useEffect(() => {
 		getGamesData()

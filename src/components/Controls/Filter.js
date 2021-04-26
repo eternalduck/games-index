@@ -15,8 +15,8 @@ const Filter = () => {
 
 	// Fetch a list of parent platforms
 	useEffect(() => {
-		const getPlatformsList = async () => {
-			await apiCall(setPlatformsData, undefined, requestURLs.URLplatforms)
+		const getPlatformsList = () => {
+			apiCall(setPlatformsData, undefined, requestURLs.URLplatforms)
 		}
 		getPlatformsList()
 	}, [])

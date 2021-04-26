@@ -38,9 +38,8 @@ const GameItem = (props) => {
 					<Date>{text.labelDate} <span>{props.game.released}</span></Date>
 					{platformId !== "" &&
 						<Platforms>
-							{props.game.parent_platforms.map(pl =>
-								<span key={pl.platform.id}>{pl.platform.name}</span>
-							)}
+							{props.game.parent_platforms.map(pl => {return pl.platform.name}
+							).join(", ")}
 						</Platforms>
 					}
 				</>
@@ -106,12 +105,4 @@ const Platforms = styled.p`
 	font-style: italic;
 	color: ${colors.lightGray};
 	margin-top: 20px;
-	span {
-		&:after {
-			content: ", ";
-		}
-		&:last-child:after {
-			content: "";
-		}
-	}
 `
