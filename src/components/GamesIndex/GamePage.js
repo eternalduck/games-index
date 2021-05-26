@@ -1,42 +1,39 @@
 import React, {useState, useEffect} from "react"
 import {Link, useParams} from "react-router-dom"
-import {config} from "../data/config"
-import {apiCall} from "../service/apiCalls"
+import {requestURLs, apiCall} from "../../service/apiCalls"
 import styled from "styled-components"
-import {colors, media, mixins, sizes} from "../../style/vars-mixins/_index"
+import {colors, mixins, sizes} from "../../style/vars-mixins/_index"
 import {ArrowBack} from "@material-ui/icons"
 import Layout from "../Layout/Layout"
-import Page404 from "../service/Page404"
-import Loading from "../service/Loading"
-import Slider from "./Slider"
-import {text} from "../data/text"
+import Page404 from "../Page404/Page404"
+import Loading from "../Loading/Loading"
+import Slider from "../Slider/Slider"
+import {text} from "../../data/text"
 
-const GamePage = (props) => {
-	const API_KEY = config.apiKey
+const GamePage = () => {
 	let {slug} = useParams()
-
+	let {noGame, labelRating, labelDate, labelWebsite} = text
 	const [game, setGame] = useState(null)
 	const [screens, setScreens] = useState(null)
-	const urlGame = `https://api.rawg.io/api/games/${slug}?key=${API_KEY}`
-	const urlScreens = `https://api.rawg.io/api/games/${slug}/screenshots?key=${API_KEY}`
+
 
 	useEffect(() => {
-		const getGame = async () => {
+		const getGame = async() => {
 			try {
-				await apiCall(setGame, undefined, urlGame)
+				await apiCall(setGame, undefined, requestURLs.URLgame(slug))
 			} catch (e) {
-				console.error("aaa game fetch failed!")
+				console.error("aaa! game fetch failed!")
 			}
 		}
 		getGame()
 	}, [])
 
 	useEffect(() => {
-		const getScreens = async () => {
+		const getScreens = async() => {
 			try {
-				await apiCall(setScreens, undefined, urlScreens)
+				await apiCall(setScreens, undefined, requestURLs.URLscreens(slug))
 			} catch (e) {
-				console.error("aaa screens fetch failed!")
+				console.error("aaa! screens fetch failed!")
 			}
 		}
 		getScreens()
@@ -44,9 +41,9 @@ const GamePage = (props) => {
 
 	return (
 		<Layout>
-			{game && game.detail === "Not found."
+			{game && game.detail === "Not found..."
 				? <BigBsod>
-					<Page404 reason={text.noGame}/>
+					<Page404 reason={noGame}/>
 				</BigBsod>
 				: <>{!game
 						? <Loading/>
@@ -58,15 +55,15 @@ const GamePage = (props) => {
 								<LinkSc to={"/"}><ArrowBack/></LinkSc>
 								<Title>{game.name}</Title>
 								<Details>
-									<p>{text.labelRating} <b>{game.rating}</b></p>
-									<p>{text.labelDate} <b>{game.released}</b></p>
+									<p>{labelRating} <b>{game.rating}</b></p>
+									<p>{labelDate} <b>{game.released}</b></p>
 									<Platforms>
 										{game.parent_platforms.map(pl =>
 												<span key={pl.platform.id}>{pl.platform.name}</span>
 										)}
 									</Platforms>
 									<a href={game.website} target="_blank" rel="noreferrer">
-										{text.labelWebsite}
+										{labelWebsite}
 									</a>
 								</Details>
 								<Description dangerouslySetInnerHTML={{__html: game.description}}/>
@@ -112,8 +109,6 @@ const Title = styled.h1`
 	text-align: center;
 `
 const Info = styled.div`
-		//background-color: ${colors.transparentBlack};
-	//padding: 40px 30px;
 	position: relative;
 	${mixins.centered};
 	max-width: 800px;

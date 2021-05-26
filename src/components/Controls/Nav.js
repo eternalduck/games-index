@@ -1,16 +1,16 @@
-import React, {useState, useEffect} from "react"
-import {useGlobalState} from "../service/globalState"
-import {apiCall} from "../service/apiCalls"
+import React, {useState} from "react"
+import {useGlobalState} from "../../service/globalState"
+import {apiCall} from "../../service/apiCalls"
 import {ArrowBack, ArrowForward, Autorenew} from "@material-ui/icons"
 import styled from "styled-components"
 import {media, mixins} from "../../style/vars-mixins/_index"
 
-const Nav = (props) => {
+const Nav = () => {
 	const [gamesData, setGamesData] = useGlobalState("gamesData")
 	const [isNavLoading, setIsNavLoading] = useState(false)
 	const [currentPage, setCurrentPage] = useGlobalState("currentPage")
-	const [prevPage, setPrevPage] = useGlobalState("prevPage")
-	const [nextPage, setNextPage] = useGlobalState("nextPage")
+	const prevPage = useGlobalState("prevPage")
+	const nextPage = useGlobalState("nextPage")
 
 	const turnThePage = async(newPageUrl) => {
 		if (newPageUrl) {

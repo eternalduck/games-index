@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import {colors, media, mixins, sizes} from "../../style/vars-mixins/_index"
+import {colors, media, mixins} from "../../style/vars-mixins/_index"
 import "@splidejs/splide/dist/css/themes/splide-default.min.css"
 import {Splide, SplideSlide} from "@splidejs/react-splide"
 

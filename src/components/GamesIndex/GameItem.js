@@ -1,44 +1,44 @@
 import React from "react"
 import {Link} from "react-router-dom"
-import {useGlobalState} from "../service/globalState"
+import {useGlobalState} from "../../service/globalState"
 import styled from "styled-components"
 import {colors, mixins} from "../../style/vars-mixins/_index"
 import {Accessibility} from "@material-ui/icons"
-import {text} from "../data/text"
+import {text} from "../../data/text"
 
 const GameItem = (props) => {
-	const [platformId, setPlatformId] = useGlobalState("platformId")
+	const {slug, background_image, name, rating, released, parent_platforms} = props.game
+	const platformId = useGlobalState("platformId")
 
 	// Cheat to retrieve a small game preview by background_image path
 	const getPoster = gameBg => {
 		if (gameBg) {
-			const poster = gameBg.match(/media\/screenshots/)
+			return gameBg.match(/media\/screenshots/)
 				? gameBg.replace("media/screenshots", "media/resize/420/-/screenshots")
 				: gameBg.replace("/media/games/", "/media/resize/420/-/games/")
-			return poster
 		}
 	}
 
 	return (
 		<Item>
-			<ImageLink to={`/game/${props.game.slug}`}>
-				{props.game.background_image
-					? <img src={getPoster(props.game.background_image)} alt={props.game.name}/>
+			<ImageLink to={`/game/${slug}`}>
+				{background_image
+					? <img src={getPoster(background_image)} alt={name}/>
 					: <NoImg><Accessibility/><br/>no preview</NoImg>
 				}
 			</ImageLink>
 			<Txt>
 				<Title>
-					<Link to={`/game/${props.game.slug}`}>
-						{props.game.name}
+					<Link to={`/game/${slug}`}>
+						{name}
 					</Link>
 				</Title>
 				<>
-					<Rating>{text.labelRating} <span>{props.game.rating}</span></Rating>
-					<Date>{text.labelDate} <span>{props.game.released}</span></Date>
+					<Rating>{text.labelRating} <span>{rating}</span></Rating>
+					<Date>{text.labelDate} <span>{released}</span></Date>
 					{platformId !== "" &&
 						<Platforms>
-							{props.game.parent_platforms.map(pl => {return pl.platform.name}
+							{parent_platforms.map(pl => {return pl.platform.name}
 							).join(", ")}
 						</Platforms>
 					}

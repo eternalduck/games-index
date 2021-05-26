@@ -33,6 +33,7 @@
 		"babel-plugin-styled-components": "^1.12.0",
 		"copy-webpack-plugin": "^6.3.2",
 		"css-loader": "^5.0.1",
+		"dotenv-webpack": "^7.0.2",
 		"eslint": "^7.6.0",
 		"eslint-plugin-react": "^7.20.6",
 		"eslint-webpack-plugin": "^2.4.1",

@@ -1,24 +1,24 @@
 import React, {useState, useEffect} from "react"
-import {useGlobalState} from "../service/globalState"
-import {requestURLs, apiCall} from "../service/apiCalls"
+import {useGlobalState} from "../../service/globalState"
+import {requestURLs, apiCall} from "../../service/apiCalls"
 import styled from "styled-components"
 import {mixins, media} from "../../style/vars-mixins/_index"
-import {text} from "../data/text"
+import {text} from "../../data/text"
 import Layout from "../Layout/Layout"
 import GameItem from "./GameItem"
 import Controls from "../Controls/Controls"
 import Nav from "../Controls/Nav"
-import Loading from "../service/Loading"
-import Page404 from "../service/Page404"
+import Loading from "../Loading/Loading"
+import Page404 from "../Page404/Page404"
 
-const IndexPage = (props) => {
+const IndexPage = () => {
 	const [gamesData, setGamesData] = useGlobalState("gamesData")
 	const [isLoading, setIsLoading] = useGlobalState("isLoading")
 	const [prevPage, setPrevPage] = useGlobalState("prevPage")
 	const [nextPage, setNextPage] = useGlobalState("nextPage")
 	const [gamesList, setGamesList] = useState(null)
 
-	// it's better to use localStorage to save fetch results.. somehow
+	// TODO it's better to use localStorage to save fetch results
 	// Main content fetching
 	const getGamesData = () => {
 		apiCall(setGamesData, setIsLoading, requestURLs.URLgamesList)
@@ -28,7 +28,7 @@ const IndexPage = (props) => {
 	}, [])
 
 	useEffect(() => {
-		//populate games list []
+		// Populate games list []
 		const processGamesList = () => {
 			if (gamesData) {
 				const games = gamesData.results

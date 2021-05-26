@@ -1,6 +1,6 @@
 import React from "react"
-import {css, createGlobalStyle} from "styled-components"
-import {media, colors, mixins} from "./vars-mixins/_index"
+import {createGlobalStyle} from "styled-components"
+import {colors} from "./vars-mixins/_index"
 import {resetCss} from "./utils/_reset"
 
 const GlobalStyle = createGlobalStyle`

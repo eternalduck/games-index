@@ -1,5 +1,6 @@
+// const webpack = require("webpack")
+const dotenv = require("dotenv-webpack")
 const path = require("path")
-const webpack = require("webpack")
 const htmlWebpackPlugin = require("html-webpack-plugin")
 const miniCssExtractPlugin = require("mini-css-extract-plugin")
 const copyPlugin = require("copy-webpack-plugin")
@@ -39,7 +40,8 @@ module.exports = {
 
 
 	plugins: [
-		new webpack.HotModuleReplacementPlugin(),//fail
+		new dotenv(),
+		// new webpack.HotModuleReplacementPlugin(),//fail
 		new ESLintPlugin(),
 		new htmlWebpackPlugin(
 			{template: "./src/public/index.html"}
@@ -70,7 +72,7 @@ module.exports = {
 
 	devServer: {
 		port: 7700,
-		open: true,
+		open: false,
 		contentBase: path.resolve(__dirname, "./build"),
 		hot: true,//FAIL
 		overlay: true,

@@ -1,19 +1,18 @@
 import React, {useState} from "react"
-import {useGlobalState} from "../service/globalState"
-import {requestURLs, apiCall} from "../service/apiCalls"
+import {useGlobalState} from "../../service/globalState"
+import {requestURLs, apiCall} from "../../service/apiCalls"
 import {ArrowUpward, ArrowDownward} from "@material-ui/icons"
 import styled from "styled-components"
 import {colors, mixins} from "../../style/vars-mixins/_index"
-import {text} from "../data/text"
+import {text} from "../../data/text"
 
-const Sort = (props) => {
+const Sort = () => {
 	const [ratingDesc, setRatingDesc] = useState(null)
 	const [dateDesc, setDateDesc] = useState(null)
 	const [gamesData, setGamesData] = useGlobalState("gamesData")
 	const [isLoading, setIsLoading] = useGlobalState("isLoading")
 	const [currentPage, setCurrentPage] = useGlobalState("currentPage")
-	const [searchTerm, setSearchTerm] = useGlobalState("searchTerm")
-	const [platformId, setPlatformId] = useGlobalState("platformId")
+	const searchTerm = useGlobalState("searchTerm")
 
 	const doSorting = async(url) => {
 		// sort search results, platform should be taken into account too but I failed)
@@ -22,7 +21,6 @@ const Sort = (props) => {
 		}
 		await apiCall(setGamesData, setIsLoading, url)
 		setCurrentPage(1)
-
 	}
 
 	return (
@@ -54,12 +52,14 @@ const Sort = (props) => {
 }
 export default Sort
 
-const Toggle = (props, onClick) => {
+const Toggle = (props) => {
+	const {option, onClick, children} = props
+
 	return(
-		<Button sortDirection={props.option} onClick={props.onClick}>
-			<span>{props.children}</span>
-			{props.option !== null
-				? props.option
+		<Button sortDirection={option} onClick={onClick}>
+			<span>{children}</span>
+			{option !== null
+				? option
 						? <ArrowUpward/>
 						: <ArrowDownward/>
 				: null

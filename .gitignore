@@ -5,3 +5,4 @@ desktop.ini
 report.*
 node_modules/
 build/
+.env

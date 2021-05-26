@@ -1,9 +1,9 @@
-import React, {useState, useEffect, useMemo} from "react"
-import {useGlobalState} from "../service/globalState"
-import {requestURLs, apiCall} from "../service/apiCalls"
+import React, {useState, useEffect} from "react"
+import {useGlobalState} from "../../service/globalState"
+import {requestURLs, apiCall} from "../../service/apiCalls"
 import styled from "styled-components"
-import {media, colors, mixins} from "../../style/vars-mixins/_index"
-import {text} from "../data/text"
+import {mixins} from "../../style/vars-mixins/_index"
+import {text} from "../../data/text"
 
 const Filter = () => {
 	const [gamesData, setGamesData] = useGlobalState("gamesData")
@@ -11,7 +11,7 @@ const Filter = () => {
 	const [currentPage, setCurrentPage] = useGlobalState("currentPage")
 	const [platformsData, setPlatformsData] = useState(null)
 	const [platformId, setPlatformId] = useGlobalState("platformId")
-	const [searchTerm, setSearchTerm] = useGlobalState("searchTerm")
+	const searchTerm = useGlobalState("searchTerm")
 
 	// Fetch a list of parent platforms
 	useEffect(() => {
@@ -23,7 +23,7 @@ const Filter = () => {
 
 	// Fetch games by selected platform
 	useEffect(() => {
-		const filterByPlatform = async () => {
+		const filterByPlatform = async() => {
 			let url
 			if (searchTerm !== "") {// filter search results
 				url = `${requestURLs.URLgamesByPlatform}${platformId}&search=${searchTerm}`
@@ -37,10 +37,12 @@ const Filter = () => {
 	}, [platformId])
 
 	return (
-		<Select onChange={e => setPlatformId(e.target.value)} value={""}>
+		<Select onChange={e => setPlatformId(e.target.value)} value={platformId}>
 			<option value={""} disabled>{text.labelSelectPlatform}</option>
 			{platformsData && platformsData.results.map(pl =>
-					<option key={pl.id} value={pl.id}>
+					<option key={pl.id}
+						value={pl.id}
+					>
 						{pl.name}
 					</option>
 			)}

@@ -3,7 +3,7 @@ import {Switch, Route} from "react-router-dom"
 import GlobalStyle from "./style/GlobalStyle"
 import IndexPage from "./components/GamesIndex/IndexPage"
 import GamePage from "./components/GamesIndex/GamePage"
-import Page404 from "./components/service/Page404"
+import Page404 from "./components/Page404/Page404"
 
 export default function Root(){
 	return(

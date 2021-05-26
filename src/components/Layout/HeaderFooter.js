@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import {colors, mixins, sizes} from "../../style/vars-mixins/_index"
 import {SportsHandball} from "@material-ui/icons"
-import {text} from "../data/text"
+import {text} from "../../data/text"
 
 export const Header = () => {
 	return (

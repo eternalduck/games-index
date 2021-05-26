@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import {media, colors, mixins} from "../../style/vars-mixins/_index"
+import {media, mixins} from "../../style/vars-mixins/_index"
 import ControlContext from "./ControlContext"
 import Filter from "./Filter"
 import Sort from "./Sort"

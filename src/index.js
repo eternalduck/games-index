@@ -9,9 +9,3 @@ ReactDOM.render(
 	</Router>,
 	document.getElementById("root")
 )
-
-// fail
-// if (module.hot) {
-//   module.hot.accept()
-// }
-

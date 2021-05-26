@@ -1,12 +1,12 @@
 import React, {useEffect, useContext} from "react"
-import {useGlobalState} from "../service/globalState"
-import {requestURLs, apiCall} from "../service/apiCalls"
+import {useGlobalState} from "../../service/globalState"
+import {requestURLs, apiCall} from "../../service/apiCalls"
 import styled from "styled-components"
 import {mixins} from "../../style/vars-mixins/_index"
-import {text} from "../data/text"
+import {text} from "../../data/text"
 import ControlContext from "./ControlContext"
 
-const Search = (props) => {
+const Search = () => {
 	const [gamesData, setGamesData] = useGlobalState("gamesData")
 	const [isLoading, setIsLoading] = useGlobalState("isLoading")
 	const [searchTerm, setSearchTerm] = useGlobalState("searchTerm")
